@@ -16,7 +16,7 @@ export const AvatarSelecter: FC = () => {
       <div className="fixed inset-0 z-10 bg-gray-500 opacity-50"></div>
       <div className="fixed inset-0 z-20 h-fit p-10 m-10 bg-white rounded text-slate-900">
         <h1 className="text-4xl text-center mb-8">Vælg</h1>
-        <div className="grid grid-cols-4 gap-8">
+        <div className="grid grid-cols-4 gap-4 md:gap-8">
           {avatars.map((avatar) => (
             <div
               key={avatar}
@@ -27,7 +27,7 @@ export const AvatarSelecter: FC = () => {
                   : "p-2"
               }`}
             >
-              <span className="text-6xl">{avatar}</span>
+              <span className="text-3xl md:text-6xl">{avatar}</span>
             </div>
           ))}
         </div>
