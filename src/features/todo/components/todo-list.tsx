@@ -58,7 +58,7 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
           ))}
         </ul>
         <div className="flex justify-center">
-          <span className="text-6xl animate-bounce">{avatar}</span>
+          <span className="text-6xl md:text-9xl animate-bounce">{avatar}</span>
         </div>
         {showConfetti && <ConfettiComponent />}
       </div>

@@ -41,7 +41,7 @@ const BreakpointTracker: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 px-1 bg-gray-200 text-gray-800 text-right">
+    <div className="fixed bottom-0 right-0 z-50 px-1 bg-gray-200 text-gray-800 text-right">
       Current Breakpoint: <span>{currentBreakpoint}</span>
       <br />
       Current width: {currentWidth}

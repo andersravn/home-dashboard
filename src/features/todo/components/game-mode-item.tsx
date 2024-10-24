@@ -28,8 +28,8 @@ export const GameModeItem: FC<TodoItemProps> = ({ todo, onCheck }) => {
   }
 
   return (
-    <div className="relative flex flex-col items-center">
-      <label className="flex items-center justify-start gap-x-4 snap-center w-[calc(100vw-4rem)]">
+    <div className="relative z-0 flex flex-col items-center xl:w-screen">
+      <label className="flex items-center justify-start gap-x-4 snap-center w-[calc(100vw-4rem)] xl:max-w-[300px] xl:mx-auto">
         {todo.image ? (
           <div className="relative aspect-square w-full">
             <Image src={todo.image?.src} alt={todo.image?.alt} fill />

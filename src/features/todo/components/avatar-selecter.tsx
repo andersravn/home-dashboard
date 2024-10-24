@@ -13,8 +13,8 @@ export const AvatarSelecter: FC = () => {
   if (!showAvatarSelecter) return null;
   return (
     <>
-      <div className="fixed inset-0 bg-gray-500 opacity-50"></div>
-      <div className="fixed inset-0 h-fit p-10 m-10 bg-white rounded text-slate-900">
+      <div className="fixed inset-0 z-10 bg-gray-500 opacity-50"></div>
+      <div className="fixed inset-0 z-20 h-fit p-10 m-10 bg-white rounded text-slate-900">
         <h1 className="text-4xl text-center mb-8">Vælg</h1>
         <div className="grid grid-cols-4 gap-8">
           {avatars.map((avatar) => (
