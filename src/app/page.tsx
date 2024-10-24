@@ -5,6 +5,7 @@ import { getItems } from "@/features/todo/api/get-items";
 import { shouldShowItem } from "@/features/todo/lib/should-show-item";
 import { AvatarSelecter } from "@/features/todo/components/avatar-selecter";
 import { ResetButton } from "@/features/todo/components/reset-button";
+import { Suspense } from "react";
 
 export default async function Home() {
   const items = await getItems();
@@ -17,13 +18,15 @@ export default async function Home() {
   }
   return (
     <div className="flex flex-col gap-y-12 p-8">
-      <AvatarSelecter />
-      <Forecast />
-      <div className="flex gap-4">
-        <GameModeButton />
-        <ResetButton />
-      </div>
-      <TodoList todos={todos} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <AvatarSelecter />
+        <Forecast />
+        <div className="flex gap-4">
+          <GameModeButton />
+          <ResetButton />
+        </div>
+        <TodoList todos={todos} />
+      </Suspense>
     </div>
   );
 }
