@@ -3,7 +3,12 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { TodoItem } from "./todo-item";
 import { Item } from "@/shared/lib/types";
-import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import {
+  parseAsArrayOf,
+  parseAsBoolean,
+  parseAsString,
+  useQueryState,
+} from "nuqs";
 import { GameModeItem } from "./game-mode-item";
 import ConfettiComponent from "@/components/confetti";
 
@@ -12,7 +17,10 @@ type TodoListProps = {
 };
 
 export const TodoList: FC<TodoListProps> = ({ todos }) => {
-  const [gameMode] = useQueryState("gameMode");
+  const [gameMode] = useQueryState(
+    "gameMode",
+    parseAsBoolean.withDefault(false)
+  );
   const [checkedTodos] = useQueryState(
     "checkedItems",
     parseAsArrayOf(parseAsString).withDefault([])

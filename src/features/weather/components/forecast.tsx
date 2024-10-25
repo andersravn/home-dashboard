@@ -1,7 +1,6 @@
 import { getForecast } from "@/shared/api/5-day-3-hour-forecast";
 import { WeatherData, WeatherEntry } from "@/shared/lib/types";
 import { weatherIcons } from "@/shared/utils/icons";
-import { get } from "http";
 import React from "react";
 
 const Forecast: React.FC = async () => {
@@ -35,8 +34,7 @@ const Forecast: React.FC = async () => {
   };
   return (
     <div>
-      <h2 className="text-4xl mb-4">Vejr</h2>
-      <ul className="flex gap-4 overflow-auto">
+      <ul className="flex gap-4 overflow-auto pb-4">
         {forecast.list.slice(0, 3).map((day: WeatherEntry) => (
           <li key={day.dt} className="flex gap-2">
             <div className="flex flex-col items-center">
