@@ -23,7 +23,7 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
 
   function onCheck() {
     ref.current?.scrollBy({
-      left: document.body.clientWidth,
+      left: document.body.clientWidth - 32,
       behavior: "smooth",
     });
   }
@@ -50,7 +50,10 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
   } else {
     return (
       <div>
-        <ul className="flex gap-x-8 overflow-scroll snap-x" ref={ref}>
+        <ul
+          className="flex gap-x-8 overflow-scroll snap-x snap-mandatory"
+          ref={ref}
+        >
           {todos.map((todo) => (
             <li className="capitalize" key={todo.name}>
               <GameModeItem todo={todo} onCheck={() => onCheck()} />
