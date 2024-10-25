@@ -9,9 +9,14 @@ export const ResetButton: FC = () => {
     parseAsArrayOf(parseAsString).withDefault([])
   );
 
+  const reset = async () => {
+    await setCheckedItems([]);
+    window.location.reload();
+  };
+
   return (
     <button
-      onClick={() => setCheckedItems([])}
+      onClick={reset}
       className={`px-2 py-1 w-fit rounded text-white bg-gray-500`}
     >
       Reset
