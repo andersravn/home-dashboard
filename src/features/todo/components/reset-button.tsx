@@ -8,16 +8,21 @@ export const ResetButton: FC = () => {
     "checkedItems",
     parseAsArrayOf(parseAsString).withDefault([])
   );
+  const [avatar, setAvatar] = useQueryState("avatar", parseAsString);
 
   const reset = async () => {
     await setCheckedItems([]);
+    await setAvatar(null);
     window.location.reload();
   };
+
+  // Only show reset button when avatar is selected (in game mode)
+  if (!avatar) return null;
 
   return (
     <button
       onClick={reset}
-      className={`px-2 py-1 w-fit rounded text-white bg-gray-500`}
+      className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-lg text-white bg-gray-500 hover:bg-gray-600 shadow-lg`}
     >
       Reset
     </button>

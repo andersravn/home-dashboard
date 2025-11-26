@@ -1,26 +1,21 @@
 "use client";
 
 import { FC, useEffect, useRef, useState } from "react";
-import { TodoItem } from "./todo-item";
 import { Item } from "@/shared/lib/types";
-import {
-  parseAsArrayOf,
-  parseAsBoolean,
-  parseAsString,
-  useQueryState,
-} from "nuqs";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { GameModeItem } from "./game-mode-item";
 import ConfettiComponent from "@/components/confetti";
+import { Timer } from "./timer";
 
 type TodoListProps = {
   todos: Item[];
+  timerStarted?: boolean;
 };
 
-export const TodoList: FC<TodoListProps> = ({ todos }) => {
-  const [gameMode] = useQueryState(
-    "gameMode",
-    parseAsBoolean.withDefault(false)
-  );
+export const TodoList: FC<TodoListProps> = ({
+  todos,
+  timerStarted: timerStartedProp = false,
+}) => {
   const [checkedTodos] = useQueryState(
     "checkedItems",
     parseAsArrayOf(parseAsString).withDefault([])
@@ -28,7 +23,17 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
   const [avatar] = useQueryState("avatar", parseAsString.withDefault("🎉"));
   const [showConfetti, toggleConfetti] = useState(false);
   const [confettiKey, setConfettiKey] = useState(0);
+  const [timerStarted, setTimerStarted] = useState(false);
   const ref = useRef<HTMLUListElement | null>(null);
+
+  const isCompleted = checkedTodos?.length === todos.length && todos.length > 0;
+
+  // Start timer when prop changes to true
+  useEffect(() => {
+    if (timerStartedProp && !timerStarted) {
+      setTimerStarted(true);
+    }
+  }, [timerStartedProp, timerStarted]);
 
   function onCheck() {
     ref.current?.scrollBy({
@@ -38,59 +43,48 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
   }
 
   useEffect(() => {
-    if (checkedTodos?.length === todos.length) {
+    if (isCompleted) {
       toggleConfetti(true);
       setConfettiKey((prev) => prev + 1);
     }
-  }, [checkedTodos, todos]);
+  }, [isCompleted]);
 
   function handleEmojiClick() {
-    if (checkedTodos?.length === todos.length) {
+    if (isCompleted) {
       setConfettiKey((prev) => prev + 1);
     }
   }
 
-  if (!gameMode) {
-    return (
-      <div>
-        <h1 className="text-4xl font-bold mb-4">Husk</h1>
-        <ul className="flex flex-col gap-y-8">
-          {todos.map((todo) => (
-            <li className="capitalize" key={todo.name}>
-              <TodoItem todo={todo} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <ul
-          className="flex gap-x-8 overflow-scroll snap-x snap-mandatory"
-          ref={ref}
+  return (
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-500 to-purple-600 overflow-y-auto p-8">
+      <Timer
+        isRunning={timerStarted && !isCompleted}
+        isCompleted={isCompleted}
+      />
+      <ul
+        className="flex gap-x-8 overflow-scroll snap-x snap-mandatory"
+        ref={ref}
+      >
+        {todos.map((todo) => (
+          <li className="capitalize" key={todo.name}>
+            <GameModeItem todo={todo} onCheck={() => onCheck()} />
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-center">
+        <button
+          onClick={handleEmojiClick}
+          className={`text-6xl md:text-9xl ${
+            isCompleted
+              ? "animate-spin cursor-pointer hover:scale-110 transition-transform"
+              : "animate-bounce"
+          }`}
+          disabled={!isCompleted}
         >
-          {todos.map((todo) => (
-            <li className="capitalize" key={todo.name}>
-              <GameModeItem todo={todo} onCheck={() => onCheck()} />
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-center">
-          <button
-            onClick={handleEmojiClick}
-            className={`text-6xl md:text-9xl ${
-              checkedTodos?.length === todos.length
-                ? "animate-spin cursor-pointer hover:scale-110 transition-transform"
-                : "animate-bounce"
-            }`}
-            disabled={checkedTodos?.length !== todos.length}
-          >
-            {avatar}
-          </button>
-        </div>
-        {showConfetti && <ConfettiComponent key={confettiKey} />}
+          {avatar}
+        </button>
       </div>
-    );
-  }
+      {showConfetti && <ConfettiComponent key={confettiKey} />}
+    </div>
+  );
 };

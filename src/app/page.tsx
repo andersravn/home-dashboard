@@ -1,10 +1,9 @@
 import Forecast from "@/features/weather/components/forecast";
-import { TodoList } from "@/features/todo/components/todo-list";
-import { GameModeButton } from "@/features/todo/components/game-mode-button";
 import { getItems } from "@/features/todo/api/get-items";
 import { shouldShowItem } from "@/features/todo/lib/should-show-item";
 import { AvatarSelecter } from "@/features/todo/components/avatar-selecter";
 import { ResetButton } from "@/features/todo/components/reset-button";
+import { TodoWrapper } from "@/features/todo/components/todo-wrapper";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -17,15 +16,11 @@ export default async function Home() {
     }
   }
   return (
-    <div className="flex flex-col gap-y-12 p-8">
+    <div>
       <Suspense fallback={<div>Loading...</div>}>
+        <TodoWrapper todos={todos} forecast={<Forecast />} />
         <AvatarSelecter />
-        <Forecast />
-        <div className="flex gap-4">
-          <GameModeButton />
-          <ResetButton />
-        </div>
-        <TodoList todos={todos} />
+        <ResetButton />
       </Suspense>
     </div>
   );
