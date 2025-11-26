@@ -3,17 +3,6 @@ import { Item } from "@/shared/lib/types";
 export async function getItems(): Promise<Item[]> {
   return [
     {
-      name: "t-shirt",
-      icon: "👕",
-      conditionals: [],
-      image: {
-        src: "/images/tshirt.webp",
-        alt: "T-shirt",
-        width: 100,
-        height: 100,
-      },
-    },
-    {
       name: "bukser",
       icon: "👖",
       conditionals: ["Temperature"],
@@ -21,6 +10,17 @@ export async function getItems(): Promise<Item[]> {
       image: {
         src: "/images/bukser.jpg",
         alt: "Bukser",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "t-shirt",
+      icon: "👕",
+      conditionals: [],
+      image: {
+        src: "/images/tshirt.webp",
+        alt: "T-shirt",
         width: 100,
         height: 100,
       },
@@ -60,17 +60,17 @@ export async function getItems(): Promise<Item[]> {
         height: 100,
       },
     },
-    {
-      name: "tandbørste",
-      icon: "🪥",
-      conditionals: [],
-      image: {
-        src: "/images/tandborste.jpg",
-        alt: "Tandbørste",
-        width: 100,
-        height: 100,
-      },
-    },
+    // {
+    //   name: "tandbørste",
+    //   icon: "🪥",
+    //   conditionals: [],
+    //   image: {
+    //     src: "/images/tandborste.jpg",
+    //     alt: "Tandbørste",
+    //     width: 100,
+    //     height: 100,
+    //   },
+    // },
     {
       name: "d-dråber",
       icon: "💧",
@@ -82,30 +82,30 @@ export async function getItems(): Promise<Item[]> {
         height: 100,
       },
     },
-    {
-      name: "regntøj",
-      icon: "🌂",
-      conditionals: ["Weather"],
-      weather: ["Rain"],
-      image: {
-        src: "/images/regntoj.jpg",
-        alt: "Regntøj",
-        width: 100,
-        height: 100,
-      },
-    },
-    {
-      name: "ekstra sokker",
-      icon: "🧦",
-      conditionals: ["Weather"],
-      weather: ["Rain"],
-      image: {
-        src: "/images/stromper.jpg",
-        alt: "Ekstra sokker",
-        width: 100,
-        height: 100,
-      },
-    },
+    // {
+    //   name: "regntøj",
+    //   icon: "🌂",
+    //   conditionals: ["Weather"],
+    //   weather: ["Rain"],
+    //   image: {
+    //     src: "/images/regntoj.jpg",
+    //     alt: "Regntøj",
+    //     width: 100,
+    //     height: 100,
+    //   },
+    // },
+    // {
+    //   name: "ekstra sokker",
+    //   icon: "🧦",
+    //   conditionals: ["Weather"],
+    //   weather: ["Rain"],
+    //   image: {
+    //     src: "/images/stromper.jpg",
+    //     alt: "Ekstra sokker",
+    //     width: 100,
+    //     height: 100,
+    //   },
+    // },
     {
       name: "flyverdragt",
       icon: "🧥",
@@ -114,6 +114,54 @@ export async function getItems(): Promise<Item[]> {
       image: {
         src: "/images/flyverdragt.jpg",
         alt: "Flyverdragt",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "sko",
+      icon: "👟",
+      conditionals: ["Temperature"],
+      temperature: { min: 6 },
+      image: {
+        src: "/images/sko.png",
+        alt: "Sko",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "vinterstøvler",
+      icon: "👟",
+      conditionals: ["Temperature"],
+      temperature: { max: 5 },
+      image: {
+        src: "/images/vinterstovler.png",
+        alt: "Vinterstøvler",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "jakke",
+      icon: "🧥",
+      conditionals: ["Temperature"],
+      temperature: { min: 6, max: 15 },
+      image: {
+        src: "/images/jakke.webp",
+        alt: "Jakke",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "hue",
+      icon: "🧢",
+      conditionals: ["Temperature"],
+      temperature: { max: 10 },
+      image: {
+        src: "/images/hue.jpg",
+        alt: "Hue",
         width: 100,
         height: 100,
       },
@@ -139,6 +187,17 @@ export async function getItems(): Promise<Item[]> {
       image: {
         src: "/images/solcreme.jpg",
         alt: "Solcreme",
+        width: 100,
+        height: 100,
+      },
+    },
+    {
+      name: "cykelhjelm",
+      icon: "🚲",
+      conditionals: [],
+      image: {
+        src: "/images/cykelhjelm.png",
+        alt: "Cykelhjelm",
         width: 100,
         height: 100,
       },

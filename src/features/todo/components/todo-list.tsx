@@ -27,6 +27,7 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
   );
   const [avatar] = useQueryState("avatar", parseAsString.withDefault("🎉"));
   const [showConfetti, toggleConfetti] = useState(false);
+  const [confettiKey, setConfettiKey] = useState(0);
   const ref = useRef<HTMLUListElement | null>(null);
 
   function onCheck() {
@@ -39,8 +40,15 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
   useEffect(() => {
     if (checkedTodos?.length === todos.length) {
       toggleConfetti(true);
+      setConfettiKey((prev) => prev + 1);
     }
   }, [checkedTodos, todos]);
+
+  function handleEmojiClick() {
+    if (checkedTodos?.length === todos.length) {
+      setConfettiKey((prev) => prev + 1);
+    }
+  }
 
   if (!gameMode) {
     return (
@@ -69,17 +77,19 @@ export const TodoList: FC<TodoListProps> = ({ todos }) => {
           ))}
         </ul>
         <div className="flex justify-center">
-          <span
+          <button
+            onClick={handleEmojiClick}
             className={`text-6xl md:text-9xl ${
               checkedTodos?.length === todos.length
-                ? "animate-spin"
+                ? "animate-spin cursor-pointer hover:scale-110 transition-transform"
                 : "animate-bounce"
             }`}
+            disabled={checkedTodos?.length !== todos.length}
           >
             {avatar}
-          </span>
+          </button>
         </div>
-        {showConfetti && <ConfettiComponent />}
+        {showConfetti && <ConfettiComponent key={confettiKey} />}
       </div>
     );
   }
